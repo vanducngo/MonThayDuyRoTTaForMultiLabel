@@ -1,0 +1,27 @@
+{
+  "os":  "macOS-12.7.6-x86_64-i386-64bit",
+  "python":  "CPython 3.12.2",
+  "startedAt":  "2025-07-31T05:28:35.262458Z",
+  "program":  "/Users/admin/Working/MonThayDuyRoTTaForMultiLabel/PrepareDataAndBaseModel/main.py",
+  "codePath":  "PrepareDataAndBaseModel/main.py",
+  "codePathLocal":  "main.py",
+  "git":  {
+    "remote":  "git@github.com:vanducngo/MonThayDuyRoTTaForMultiLabel.git"
+  },
+  "email":  "vanducngo190@gmail.com",
+  "root":  "/Users/admin/Working/MonThayDuyRoTTaForMultiLabel/PrepareDataAndBaseModel",
+  "host":  "admins-MacBook-Pro.local",
+  "executable":  "/opt/anaconda3/bin/python",
+  "cpu_count":  4,
+  "cpu_count_logical":  8,
+  "disk":  {
+    "/":  {
+      "total":  "500068036608",
+      "used":  "433373143040"
+    }
+  },
+  "memory":  {
+    "total":  "17179869184"
+  },
+  "writerId":  "nox5bi0zrmld1wythvyud3yollhyojfk"
+}
