@@ -206,5 +206,6 @@ def main(input_csv_path: str):
 
 
 if __name__ == "__main__":
-    input_file = '/Users/admin/Working/Data/CheXpert-v1.0-small/train_origin.csv'    
+    # input_file = '/Users/admin/Working/Data/CheXpert-v1.0-small/train_origin.csv'    
+    input_file = '/home/ngoto/Working/Data/CheXpert-v1.0-small/train_origin.csv'
     main(input_file)

@@ -1,8 +1,8 @@
 DATA:
-  # CHEXPERT_PATH_ROOT_PATH: "/home/ngoto/Working/Data"
-  # CHEXPERT_PATH: "/home/ngoto/Working/Data/CheXpert-v1.0-small"
-  CHEXPERT_PATH_ROOT_PATH: "/Users/admin/Working/Data"
-  CHEXPERT_PATH: "/Users/admin/Working/Data/CheXpert-v1.0-small"
+  CHEXPERT_PATH_ROOT_PATH: "/home/ngoto/Working/Data"
+  CHEXPERT_PATH: "/home/ngoto/Working/Data/CheXpert-v1.0-small"
+  # CHEXPERT_PATH_ROOT_PATH: "/Users/admin/Working/Data"
+  # CHEXPERT_PATH: "/Users/admin/Working/Data/CheXpert-v1.0-small"
   CHEXPERT_TRAIN_CSV: "train_final.csv"
   CHEXPERT_TEST_CSV: "valid_final.csv"
 
