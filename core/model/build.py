@@ -44,7 +44,7 @@ def get_model(cfg, feature_extract=False, useWeight=True, numclasses=5):
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def get_pretrained_model(cfg):
-    model_path = './ckpt/path.pth'
+    model_path = './ckpt/mobilenet_aug_03_22h30.pth'
     print(f"Loading fine-tuned weights from: {model_path}")
     if not os.path.exists(model_path):
         raise FileNotFoundError(f"Model file not found at {model_path}. Please run the training script first.")
