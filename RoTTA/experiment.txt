@@ -1,0 +1,27 @@
+
+
+CLEAN DATA
+- ZeroShot:
+    - Mean AUC: 0.7174
+    - auc/Atelectasis: 0.6770
+    - auc/Cardiomegaly: 0.8003
+    - auc/Consolidation: 0.6200
+    - auc/Pleural Effusion: 0.7363
+    - auc/Pneumothorax: 0.7531
+- RoTTa
+    - Mean AUC: 0.7373
+    - auc/Atelectasis: 0.6896
+    - auc/Cardiomegaly: 0.8299
+    - auc/Consolidation: 0.6313
+    - auc/Pleural Effusion: 0.7551
+    - auc/Pneumothorax: 0.7806
+- TENT
+    - Mean AUC: 0.6699
+    - auc/Atelectasis: 0.6404
+    - auc/Cardiomegaly: 0.7294
+    - auc/Consolidation: 0.5912
+    - auc/Pleural Effusion: 0.7079
+    - auc/Pneumothorax: 0.6805
+
+
+NOISE:
