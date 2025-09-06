@@ -1,0 +1,99 @@
+TEST:
+  BATCH_SIZE: 64
+
+OPTIM:
+  METHOD: Adam
+  STEPS: 1
+  BETA: 0.9
+  # LR: 1e-5
+  LR: 0.00025 # 00025 (TENT), CoTTA: 0.001, Other: 00001
+  WD: 0.
+
+INPUT:
+  # Cifar
+  # SIZE: (32, 32)
+
+  # Medical
+  SIZE: [224, 224]
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 2.225]
+
+ADAPTER:
+  NAME: tent # tent rotta_multilabels norm cotta
+  RoTTA:
+    NU: 0.001
+    MEMORY_SIZE: 64
+    UPDATE_FREQUENCY: 64
+    LAMBDA_T: 1.0
+    LAMBDA_U: 1.0
+    ALPHA: 0.05
+
+LOADER:
+  NUM_WORKS: 4
+  SAMPLER:
+    TYPE: "temporal"
+
+MODEL:
+  ARCH: 'resnet18' # resnet18, resnet50, mobilenet_v3_small, densenet121
+  NUM_CLASSES: 5
+
+DATASET:
+  NAME: 'CXR'
+  TEST_DOMAINS: ['nih14'] # Các domain chạy TTA ['vindr', 'nih14', 'padchest']
+  LABELS_LIST: ['Atelectasis', 'Cardiomegaly', 'Consolidation', 'Pleural Effusion', 'Pneumothorax']
+
+  # VINDR_PATH: "/Users/admin/Working/Data/MixData/vinbigdata_structured"
+  VINDR_PATH: "/home/ngoto/Working/Data/MixData/vinbigdata_structured"
+  VINDR_CSV: "validate_reordered.csv" # "validate_reordered.csv"
+  VINDR_IMAGE_DIR: "images"
+
+  # NIH14_PATH: "/Users/admin/Working/Data/MixData/nih_14_structured"
+  NIH14_PATH: "/home/ngoto/Working/Data/MixData/nih_14_structured"
+  NIH14_CSV: "validate_reordered.csv" # "validate_reordered.csv"
+  NIH14_IMAGE_DIR: "images"
+
+  # PADCHEST_PATH: "/Users/admin/Working/Data/MixData/PadChestPruning"
+  # PADCHEST_CSV: "validate.csv"
+  # PADCHEST_IMAGE_DIR: "images"
+  PADCHEST_PATH: "/home/ngoto/Working/Data/MixData/PadChestPruning"
+  PADCHEST_CSV: "refined_padchest_labels_reordered.csv"
+  PADCHEST_IMAGE_DIR: "images-224"
+  
+  CHEXPERT_PATH: '/Users/admin/Working/Data/MixData/nih_14_structured'
+  CHEXPERT_CSV: 'validate.csv'
+  CHEXPERT_IMAGE_DIR: 'valid'
+  
+  ADAPTATION_MODE: "corruption" # domain, corruption
+  # Single domain
+  BASE_DOMAIN:
+    # PATH: "/home/ngoto/Working/Data/CheXpert-v1.0-small"
+    # CSV: "valid_split.csv" # "validate_reordered.csv, validate_reordered_subset.csv, valid_split"
+    # IMAGE_DIR: "images"
+    
+    PATH: "/home/ngoto/Working/Data/MixData/nih_14_structured"
+    # PATH: "/Users/admin/Working/Data/MixData/nih_14_structured"
+    CSV: "validate_reordered.csv" # "validate_reordered.csv, validate_reordered_subset.csv, valid_split"
+    IMAGE_DIR: "images"
+
+  TEST_CORRUPTIONS:
+    - elastic_transform # 0.7404
+    - contrast          # 0.7336
+    - snow              # 0.7291
+    - pixelate          # 0.7191
+    - defocus_blur      # 0.7134
+    - motion_blur       # 0.6622
+    - zoom_blur         # 0.6567  
+    - brightness        # 0.6562
+    - gaussian_noise    # 0.6547
+    - jpeg_compression  # 0.6543
+    - glass_blur        # 0.6494
+    - shot_noise        # 0.6411
+    - fog               # 0.6382
+    - frost             # 0.6079
+    - impulse_noise     # 0.5999
+
+  # SEVERITY: 0.01 # Mức độ nhiễu (0-5)
+  # SEVERITY: 1.00
+  SEVERITY: 5.00
+
+OUTPUT_DIR: 'Log/Tent'

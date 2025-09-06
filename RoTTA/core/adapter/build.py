@@ -1,0 +1,26 @@
+from RoTTA.core.adapter.zeroshot_multiLabels import ZeroshotMultiLabels
+from RoTTA.core.adapter.cotta_multilabel import CoTTAMultiLabel
+from RoTTA.core.adapter.tent_multilabel import TentMultiLabel
+from RoTTA.core.adapter.norm_multilabel import NormMultiLabel
+from RoTTA.core.adapter.rotta_multilabels import RoTTA_MultiLabels
+from .base_adapter import BaseAdapter
+from .rotta import RoTTA
+
+def build_adapter(cfg) -> type(BaseAdapter):
+    adapterName = cfg.ADAPTER.NAME
+    print(f'Using adapter: {adapterName}')
+    if adapterName == "rotta":
+        return RoTTA
+    elif adapterName == "rotta_multilabels":
+        return RoTTA_MultiLabels
+    elif adapterName == 'tent':
+        return TentMultiLabel
+    elif adapterName == 'norm':
+        return NormMultiLabel
+    elif adapterName == 'cotta':
+        return CoTTAMultiLabel
+    elif adapterName == "zeroshot":
+        return ZeroshotMultiLabels
+    else:
+        raise NotImplementedError("Implement your own adapter")
+
