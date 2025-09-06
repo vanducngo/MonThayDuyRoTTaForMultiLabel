@@ -48,8 +48,8 @@ class RoTTA_MultiLabels(BaseAdapter):
     def forward_and_adapt(self, batch_data, model, optimizer):
         # batch data
         with torch.no_grad():
-            model.eval()
-            self.model_ema.eval()
+            model.train()
+            self.model_ema.train()
             
             ema_out_14_cls = self.model_ema(batch_data)
             ema_out_5_cls = torch.index_select(ema_out_14_cls, 1, self.target_indices)

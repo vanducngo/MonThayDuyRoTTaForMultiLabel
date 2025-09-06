@@ -22,7 +22,7 @@ ADAPTER:
   NAME: rotta_multilabels
   RoTTA:
     NU: 0.001
-    MEMORY_SIZE: 64
+    MEMORY_SIZE: 128
     UPDATE_FREQUENCY: 64
     LAMBDA_T: 1.0
     LAMBDA_U: 1.0

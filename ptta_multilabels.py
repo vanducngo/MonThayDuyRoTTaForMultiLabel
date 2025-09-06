@@ -37,7 +37,7 @@ def testTimeAdaptationMultiLabel(cfg):
     logger.info("Model and TTA adapter initialized.")
 
     # --- 2. Vòng lặp Epochs ---
-    num_epochs = 1
+    num_epochs = 10
     best_auc = 0.0
     best_model_state = None
 

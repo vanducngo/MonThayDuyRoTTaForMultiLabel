@@ -22,7 +22,6 @@ def get_model(cfg, feature_extract=False, useWeight=True, numclasses=5):
             model.classifier = nn.Sequential(
                 nn.Linear(model.classifier[0].in_features, 512),
                 nn.ReLU(),
-                nn.Dropout(p=0.5),
                 nn.Linear(512, numclasses)
             )
         else:
