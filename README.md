@@ -46,17 +46,112 @@ Dự án được thực hiện bởi các thành viên:
 
 ## 🚀 Bắt đầu (Getting Started)
 
-### 1. ⚙️ Cài đặt Môi trường
+## ⚙️ Cài đặt
+
+### 1. Clone Repository
 
 ```bash
-# 1. Clone repository
-git clone https://github.com/vanducngo/CS2225.CH190.NhanDangThiGiacVaUngDung.git
+git clone git@github.com:vanducngo/CS2225.CH190.NhanDangThiGiacVaUngDung.git
 cd CS2225.CH190.NhanDangThiGiacVaUngDung
+```
 
-# 2. Tạo và kích hoạt môi trường ảo
+### 2. Tạo Môi trường Ảo và Cài đặt Thư viện
+
+Nên sử dụng một môi trường ảo để tránh xung đột thư viện.
+
+```bash
+# Tạo môi trường ảo (ví dụ với venv)
 python -m venv venv
-source venv/bin/activate  # Trên macOS/Linux
-# venv\Scripts\activate  # Trên Windows
 
-# 3. Cài đặt các thư viện cần thiết
+# Kích hoạt môi trường
+# Trên Windows:
+venv\Scripts\activate
+# Trên macOS/Linux:
+source venv/bin/activate
+
+# Cài đặt các thư viện cần thiết
 pip install -r requirements.txt
+```
+
+## 📂 Chuẩn bị Dữ liệu
+
+### 1. Tải Dữ liệu
+
+Tải hai bộ dữ liệu từ Kaggle và giải nén vào một thư mục (ví dụ: `datasets/`):
+
+- **CheXpert (Miền nguồn):** [https://www.kaggle.com/datasets/ashery/chexpert](https://www.kaggle.com/datasets/ashery/chexpert)
+- **NIH Chest X-ray14 (Miền đích):** [https://www.kaggle.com/datasets/nih-chest-xrays/data](https://www.kaggle.com/datasets/nih-chest-xrays/data)
+
+Cấu trúc thư mục của bạn nên trông như sau:
+```
+CS2225.CH190.NhanDangThiGiacVaUngDung/
+├── datasets/
+│   ├── CheXpert-v1.0-small/
+│   └── nih-chest-xrays/
+├── DataPreprocessing/
+├── RoTTA/
+└── ...
+```
+
+### 2. Chạy Script Tiền xử lý
+
+Các script này sẽ lọc 5 bệnh lý mục tiêu, xử lý hình ảnh và tạo ra các file `.csv` cần thiết cho quá trình huấn luyện và kiểm thử.
+
+```bash
+cd DataPreprocessing
+
+# Tiền xử lý CheXpert
+python chexpert_final_pre_processing_train_validation_test.py
+
+# Tiền xử lý NIH-14
+python nih14_final_pre_processing.py
+```
+Sau khi chạy, các file dữ liệu đã được xử lý sẽ được tạo ra, sẵn sàng cho các bước tiếp theo.
+
+## 🚀 Chạy Thí nghiệm (Running Experiments)
+
+### 1. Cấu hình Đường dẫn Dữ liệu
+
+Trước khi chạy, bạn **bắt buộc** phải cập nhật đường dẫn tới dữ liệu đã được tiền xử lý trong các file cấu hình YAML. Mở các file sau và chỉnh sửa các trường `DATA_DIR`:
+
+- `RoTTA/configs/adapter/zero_shot.yaml`
+- `RoTTA/configs/adapter/rotta.yaml`
+- `RoTTA/configs/adapter/tent.yaml`
+
+Ví dụ trong `rotta.yaml`:
+```yaml
+DATASET:
+  NAME: "nih14" 
+  # Sửa đường dẫn này thành đường dẫn tới thư mục chứa file csv và ảnh của NIH-14 đã được xử lý
+  DATA_DIR: "/path/to/your/processed/nih14_data" 
+  ...
+```
+
+### 2. Thực thi các Phương pháp
+
+Di chuyển vào thư mục `RoTTA` và chạy các lệnh sau để thực thi từng phương pháp:
+
+```bash
+cd RoTTA
+```
+
+- **Chạy Baseline `Source-only` (Zero-Shot):**
+    ```bash
+    python ptta_multilabels.py -cfg configs/adapter/zero_shot.yaml
+    ```
+
+- **Chạy `RoTTA-ML` (Phương pháp đề xuất):**
+    ```bash
+    python ptta_multilabels.py -cfg configs/adapter/rotta.yaml
+    ```
+
+- **Chạy `TENT-ML` (Phương pháp so sánh):**
+    ```bash
+    python ptta_multilabels.py -cfg configs/adapter/tent.yaml
+    ```
+
+Kết quả và các file log sẽ được lưu trong thư mục `output/` được định nghĩa trong file config.
+
+## 📄 Giấy phép (License)
+
+Dự án này được cấp phép theo [MIT License](LICENSE).
